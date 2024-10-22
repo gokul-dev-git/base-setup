@@ -1,17 +1,17 @@
 /* eslint-disable no-undef */
 const request = require('supertest');
 const express = require('express');
-const authController = require('../../../src/controllers/authController');
-const loginVerifyValidation = require('../../../src/middlewares/validation/loginVerifyValidation');
-const errorHandler = require('../../../src/middlewares/errorHandler');
+const authController = require('../../src/controllers/authController');
+const loginVerifyValidation = require('../../src/middlewares/validation/loginVerifyValidation');
+const errorHandler = require('../../src/middlewares/errorHandler');
 
 const app = express();
 app.use(express.json());
 app.post('/validateSME', loginVerifyValidation, authController.loginValidate);
 app.use(errorHandler);
 
-jest.mock('../../../src/controllers/authController');
-jest.mock('../../../src/config/smsConfig', () => ({
+jest.mock('../../src/controllers/authController');
+jest.mock('../../src/config/smsConfig', () => ({
   messages: {
     create: jest.fn().mockResolvedValue(true),
   },
